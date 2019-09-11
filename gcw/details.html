@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>商品详情</title>
+  <link rel="stylesheet" href="css/public.css"/>
+  <link rel="stylesheet" href="css/details.css"/>
+</head>
+<body>
+  <div id="header"></div>
+  <div id="search"></div>
+  <div id="nav"></div>
+  <div id="main" class="margin">
+    <div class="t">
+      <span>当前位置：</span>
+      <a>首页</a>
+      <span>>用户中心</span>
+    </div>
+    <div class="b">
+      <ul class="l">
+        <!-- <li class="l-t">
+          <div class="small">
+            <img src="img/x1.jpg"> 
+            <p class="move"></p>
+          </div>
+          <div class="big">
+            <img src="img/x1.jpg" class="look_girl"/>
+          </div>
+        </li>          
+        <li class="l-b">                        
+          <img src="img/x2.jpg">
+          <img src="img/x3.jpg">
+          <img src="img/x4.jpg">
+          <img src="img/x5.jpg">
+          <img src="img/x6.jpg">                     
+        </li>   -->
+      </ul>
+      <ul class="c">
+        <!-- <li>天福茗茶 金骏眉红茶 武夷山红茶特级茶叶散装瓷罐礼盒2019新茶</li>
+        <li> 
+          <span>价格：<b>￥2000.00</b></span>                          
+        </li>         
+        <li>品牌：天福茗茶</li>                                        
+        <li>商品重量：250克&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品库存：50</li>
+        <li>用户评价：<img src="img/stars5.gif">&nbsp;&nbsp;&nbsp; 用户评论</li>
+        <li>支付方式：银联<span> | </span>支付宝<span> | </span>转账汇款</li>
+        <li class="la">
+            <div>
+              <font>我要买：</font>
+              <input type="text" value="1">件  
+            </div>
+            <img src="img/jr.jpg"> &nbsp;&nbsp;<img src="img/sc.png">
+        </li>                
+        <li style="margin-top:100px;">
+          <div>分享这个商品到：</div>                  
+          <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+            <a class="bds_tsina" title="分享到新浪微博" href="#"></a>
+            <a class="bds_qzone" title="分享到QQ空间" href="#"></a>
+            <a class="bds_tqq" title="分享到腾讯微博" href="#"></a>
+            <a class="bds_sqq" title="分享到QQ好友" href="#"></a>
+            <a class="bds_renren" title="分享到人人网" href="#"></a>
+            <a class="bds_taobao" title="分享到我的淘宝" href="#"></a>
+            <span class="bds_more"></span>
+          </div>                                   
+        </li> -->
+      </ul>
+      <div class="r">
+        <div class="r-t">相关产品</div>
+          <ul>
+            <li>
+              <div>
+                <img src="img/xr1.jpg" style="width:100px;height:100px;">
+              </div>              
+              <a href="#">天福茗茶 武夷山特产 小叶种红茶 瓷罐礼盒装250G 红茶 新品上市</a><br>
+              <font>￥388.00</font>
+            </li>
+            <li>
+              <div>
+                <img src="img/xr2.jpg" style="width:100px;height:100px;">
+              </div>              
+              <a href="#">天福茗茶 颂福罐装茶 武夷山金骏眉红茶茶叶礼盒装送礼精品135g</a><br>
+              <font>￥520.00</font>
+            </li>
+            <li>
+              <div>
+                <img src="img/xr3.jpg" style="width:100px;height:100px;">
+              </div>              
+              <a href="#">天福茗茶 金骏眉 武夷山小叶种红茶 茶叶 陶瓷罐装100克陶瓷/礼盒</a><br>
+              <font>￥2380.00</font>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div id="footer"></div>  
+</body>
+<script src="../jQuery.js"></script>
+<script>
+  $("#footer").load("http://localhost/1907/gcw/data.html footer")
+  $("#header").load("http://localhost/1907/gcw/data.html header")
+  $("#search").load("http://localhost/1907/gcw/data.html .search")
+  $("#nav").load("http://localhost/1907/gcw/data.html nav")
+</script>
+<script src="js/menu.js"></script>
+<script src="js/ajax2.0.js"></script>
+<script>
+ class Details{
+      constructor(){
+          this.url = "http://localhost/1907/gcw/js/list.json";
+          this.l = document.getElementsByClassName("l")[0];
+          this.c = document.getElementsByClassName("c")[0];
+          this.load();
+          this.addEvent();
+      }
+      load(){
+          var that = this;
+          ajax({
+              url:this.url,
+              success:function(ser){
+                  that.ser = JSON.parse(ser);
+                  that.getLocal();
+              } 
+          })
+      }
+      getLocal(){
+          this.goods = JSON.parse(localStorage.getItem('goods'));
+          this.display();          
+      }
+      display(){
+          var str1 = '';
+          var str2 = "";
+          for(var i=0;i<this.ser.length;i++){
+              if(this.ser[i].goodsId == this.goods.goodsId){
+                str1 +=`<li class="l-t">
+                        <div class="small">
+                          <img src="${this.ser[i].url}"> 
+                          <p class="move"></p>
+                        </div>
+                        <div class="big">
+                          <img src="${this.ser[i].url}" class="look_girl"/>
+                        </div>
+                      </li>          
+                      <li class="l-b">                        
+                        <img src="img/x2.jpg">
+                        <img src="img/x3.jpg">
+                        <img src="img/x4.jpg">
+                        <img src="img/x5.jpg">
+                        <img src="img/x6.jpg">                     
+                      </li> `;
+                str2+=`<li>${this.ser[i].name}</li>
+                      <li> 
+                        <span>价格：<b>￥${this.ser[i].price}</b></span>                          
+                      </li>         
+                      <li>品牌：天福茗茶</li>                                        
+                      <li>商品重量：${this.ser[i].g}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品库存：${this.ser[i].c}</li>
+                      <li>用户评价：<img src="img/stars5.gif">&nbsp;&nbsp;&nbsp; 用户评论</li>
+                      <li>支付方式：银联<span> | </span>支付宝<span> | </span>转账汇款</li>
+                      <li class="la" index="${this.ser[i].goodsId}">
+                          <div>
+                            <font>我要买：</font>
+                            <input class="txt" type="text" value="1">件  
+                          </div>
+                          <img class="btn" src="img/jr.jpg"> &nbsp;&nbsp;<img src="img/sc.png">
+                      </li>
+                      <li style="margin-top:100px;">
+                        <div>分享这个商品到：</div>                  
+                        <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+                          <a class="bds_tsina" title="分享到新浪微博" href="#"></a>
+                          <a class="bds_qzone" title="分享到QQ空间" href="#"></a>
+                          <a class="bds_tqq" title="分享到腾讯微博" href="#"></a>
+                          <a class="bds_sqq" title="分享到QQ好友" href="#"></a>
+                          <a class="bds_renren" title="分享到人人网" href="#"></a>
+                          <a class="bds_taobao" title="分享到我的淘宝" href="#"></a>
+                          <span class="bds_more"></span>
+                        </div>                                   
+                      </li>`;  
+              }
+          }
+          this.l.innerHTML = str1;
+          this.c.innerHTML = str2;
+      }
+      addEvent(){
+          var that = this;
+          this.c.addEventListener("click",function(eve){
+              var e = eve || window.event;
+              var target = e.target || e.srcElement;
+              if(target.className == 'btn'){
+                that.id = target.parentNode.getAttribute('index');
+                that.num = target.previousElementSibling.lastElementChild.value;
+                console.log(that.num)
+                that.setLocal();               
+              }
+          })
+      }
+      setLocal(){
+          this.goods = JSON.parse(localStorage.getItem('goods'));         
+          localStorage.setItem('goods',JSON.stringify(this.goods));
+          localStorage.setItem('num',JSON.parse(JSON.stringify(this.num)));
+      } 
+  }
+  new Details();
+</script>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6828009" src="http://bdimg.share.baidu.com/static/js/bds_s_v2.js?cdnversion=435473"></script>               
+<script type="text/javascript">
+document.getElementsByClassName("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script> 
+<script src="js/e-fdj.js"></script>
+</html>

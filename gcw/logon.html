@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>注册</title>
+  <link rel="stylesheet" href="css/public.css"/>
+  <link rel="stylesheet" href="css/logon.css"/>
+</head>
+<body>
+  <div id="header"></div>
+  <div id="search"></div>
+  <div id="nav"></div>
+  <div id="main" class="margin">
+    <div class="t">
+      <span>当前位置：</span>
+      <a>首页</a>
+      <span>>用户中心</span>
+    </div>
+    <div class="b">
+      <div class="l">
+        <img src="img/c-l.jpg" alt="">
+      </div>
+      <div class="r">
+        <form action="">
+          <table class="tab">
+            <tbody>
+              <tr>
+                <td>
+                  <span>&nbsp;</span>
+                </td>
+                <td>
+                  <span>	由于系统升级，如果您是“天福茗茶-网上商城”的会员，请在第一次登录前先重置密码，点此重置密码。</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width:113px;text-align:right;padding:5px;color:#666;font-size:12px;">
+                  <span>用户名</span>
+                </td>
+                <td>
+                  <input name="user" id="user" type="text" style="width:206px;height:20px;padding:0 1px;">
+                  <span style="color:red">*</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width:113px;text-align:right;padding:5px;color:#666;font-size:12px;">
+                  <span>email</span>
+                </td>
+                <td>
+                  <input id="ema" type="text" style="width:206px;height:20px;padding:0 1px;">
+                  <span style="color:red">*</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width:113px;text-align:right;padding:5px;color:#666;font-size:12px;">
+                  <span>密码</span>
+                </td>
+                <td>
+                  <input id="pass" type="password" style="width:181px;height:20px;padding:0 1px;">
+                  <span style="color:red">*</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="width:113px;text-align:right;padding:5px;color:#666;font-size:12px;">
+                  <span>密码强度</span>
+                </td>
+                <td>
+                  <div style="display:flex;justify-content:space-around;width:160px;text-align: center;line-height: 24px;">
+                    <span class="q1" style="flex:1;border-radius:5px;">弱</span>
+                    <span class="q2" style="flex:1;border-radius:5px;">中</span>
+                    <span class="q3" style="flex:1;border-radius:5px;">强</span>
+                  </div>                  
+                </td>
+              </tr>
+              <tr>
+                <td style="width:113px;text-align:right;padding:5px;color:#666;font-size:12px;">
+                  <span>确认密码</span>
+                </td>
+                <td>
+                  <input id="pass2" type="password" style="width:181px;height:20px;padding:0 1px;">
+                  <span style="color:red">*</span>
+                </td>
+              </tr>              
+              <tr>
+                  <td>&nbsp;</td>
+                  <td><label>
+                    <input id="che" type="checkbox" value="1">
+                    我已看过并接受《<a href="#" style="color:blue">用户协议</a>》
+                  </label></td>
+              </tr>
+              <tr>
+                  <td>&nbsp;</td>
+                  <td>                  
+                  <input id="btn" name="Submit" type="button" value="注册用户" style="background:block;background:#60a724;border:;width:125px;height:38px;border-radius:5px;color:#fff;font-size:18px;">
+                  </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                  <td>&nbsp;</td>
+                  <td>
+                  <a href="land.html" class="jj">我已有账号，我要登录</a><br>
+                  <a href="#" class="jj">您忘记密码了吗？</a>
+                  </td>
+                </tr>
+            </tbody>
+
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  
+  <div id="footer"></div>  
+</body>
+<script src="../jQuery.js"></script>
+<script>
+  $("#footer").load("http://localhost/1907/gcw/data.html footer")
+  $("#header").load("http://localhost/1907/gcw/data.html header")
+  $("#search").load("http://localhost/1907/gcw/data.html .search")
+  $("#nav").load("http://localhost/1907/gcw/data.html nav")
+</script>
+<script src="js/logon.js"></script>
+<script src="js/menu.js"></script>
+</html>s

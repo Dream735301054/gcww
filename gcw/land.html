@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登陆</title>
+  <link rel="stylesheet" href="css/public.css"/>
+  <link rel="stylesheet" href="css/land.css"/>
+</head>
+<body>
+  <div id="header"></div>
+  <div id="search"></div>
+  <div id="nav"></div>  
+  <div id="main" class="margin">
+    <div class="t">
+      <span>当前位置：</span>
+      <a>首页</a>
+      <span>>用户中心</span>
+    </div>
+    <div class="b">
+      <div class="l">
+        <div style="width:450px;height:30px;overflow:hidden;">
+          <img src="img/hy.gif" alt="">
+        </div>
+        <form action="index.html">
+              <table>
+                <tbody>
+                  <tr>
+                    <td width="20%" align="right" style="height:46px;">用户名/Email</td>
+                    <td width="80%" style="height:46px;">
+                      <input id="user" type="text" size="25" style="width:204px;height:18px;padding:1px 0;">
+                      <span class="user"></span><br>
+                      如果您绑定了手机号码，还是可以使用手机号登录
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="20%" align="right" style="height:40px;">密码</td>
+                    <td width="80%" style="height:40px;">
+                    <input id="pass" type="password" size="15" style="width:136px;height:18px;padding:1px 0;">
+                    <span class="pass"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td>
+                      <input id="che" type="checkbox" value="1" checked = "checked">
+                      <label for="remember">请保存我这次的登录信息。</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td align="left">
+                    <input id="land" type="button" name="submit" value="用户登录" style="display:block;background:orangered;border:none;width:125px;height:38px;border-radius:5px;color:#fff;font-size:18px;margin-top:15px;">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td style="height:46px;">
+                      <a>密码问题找回密码</a>&nbsp;&nbsp;&nbsp;
+                      <a>注册邮件找回密码</a>
+                    </td>
+                  </tr>
+              <tr>
+                <td colspan="2">您还可以用以下信任帐户登录：</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <a href="http://www.gocha.cn/alipay/auth_authorize.php?type=user">
+                    <img src="http://www.gocha.cn/alipay/alipay_Logo.png">
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+      <div class="r" style="color:#666;line-height:24px;">          
+        <strong style="color:#666;">如果您不是会员，请注册</strong>  <br>
+        <strong style="color:red;">友情提示：</strong><br>
+        不注册为会员不可以在本店购买商品<br>
+        但注册之后您可以：<br>
+        1. 保存您的个人资料<br>
+        2. 收藏您关注的商品<br>
+        3. 享受会员积分制度<br>
+        4. 订阅本店商品信息  <br>
+        <a href="logon.html" style="display:block;background:#60a724;width:125px;border-radius:5px;color:#fff;font-size:18px;line-height: 40px;text-align: center;" >注册用户</a>           
+      </div>
+    </div>
+  </div>
+  <div id="footer"></div>  
+</body>
+<script src="../jQuery.js"></script>
+
+<script>
+  $("#footer").load("http://localhost/1907/gcw/data.html footer")
+  $("#header").load("http://localhost/1907/gcw/data.html header")
+  $("#search").load("http://localhost/1907/gcw/data.html .search")
+  $("#nav").load("http://localhost/1907/gcw/data.html nav")
+</script>
+<script src="js/menu.js"></script>
+<script src="js/land.js"></script>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>car</title>
+  <link rel="stylesheet" href="css/public.css"/>
+  <link rel="stylesheet" href="server/car.css"/>
+</head>
+<body>
+  <div id="header"></div>
+  <div id="search"></div>
+  <div id="nav"></div>
+  <div id="main" class="margin">
+    <div class="t">
+      <span>当前位置：</span>
+      <a>首页</a>
+      <span>>购物流程</span>
+    </div>
+    <div class="b">
+      <div class="b-t">
+        <span class="l1">购物车</span>
+        <span class="l2">填写订单并确认</span>
+        <span class="l3">成功提交订单</span>
+        <span class="l4">我的购物车</span>
+      </div>
+      <div class="b-b">
+        <form action="">
+          <table>
+            <thead>
+              <tr class="t1">
+                <th>商品名称</th>
+                <th>售价</th>
+                <th>购买数量</th>
+                <th>小计</th>
+                <th>操作</th>
+              </tr>
+            </thead>            
+            <tbody class="b-mian">
+              <!-- <tr class="t2">
+                <td>
+                  <img src="" alt="">
+                  <p>快放假啊会计法</p>
+                </td>
+                <td>￥6768</td>
+                <td>1</td>
+                <td>we</td>
+                <td>删除</td>
+              </tr>                     -->
+            </tbody>
+          </table>
+          <table>
+            <tbody></tbody>
+          </table>
+        </form>
+        <table>
+          <tbody></tbody>
+        </table>
+      </div>
+
+    </div>
+
+  <div id="footer"></div>  
+</body>
+  <script src="../jQuery.js"></script>
+  <script src="js/ajax2.0.js"></script>
+<script>
+  $("#footer").load("http://localhost/1907/gcw/data.html footer")
+  $("#header").load("http://localhost/1907/gcw/data.html header")
+  $("#search").load("http://localhost/1907/gcw/data.html .search")
+  $("#nav").load("http://localhost/1907/gcw/data.html nav")
+</script>
+<script src="js/menu.js"></script>
+<script>
+    class Car{
+        constructor(){
+            this.url = "http://localhost/1907/gcw/js/list.json";
+            this.tbody = document.getElementsByClassName("b-mian")[0];
+            this.load();
+            this.addEvent();
+        }
+        load(){
+            var that = this;
+            ajax({
+                url:this.url,
+                type:'get',
+                success:function(ser){
+                    that.ser = JSON.parse(ser);
+                    that.getLocal();
+                } 
+            })
+        }
+        getLocal(){
+            this.good = JSON.parse(localStorage.getItem('good')) || [];
+            this.num = JSON.parse(localStorage.getItem('num')) || [];
+            this.display();         
+        }
+        display(){
+            var str = '';
+            for(var i=0;i<this.ser.length;i++){
+              if(this.ser[i].goodsId == this.good.goodsId){
+                  str += `<tr class="t2" index="${this.ser[i].goodsId}">
+                              <td>
+                                <img src="${this.ser[i].url}" alt="" style="width:50px;height:50px;">
+                                <p>${this.ser[i].name}</p>  
+                              </td>
+                              <td>￥${this.ser[i].price}</td>
+                              <td><input type="number" value="${this.num}" class="num" min=1></td>
+                              <td class="money">￥${this.ser[i].price*this.num}</td>
+                              <td class="delete">删除</td>
+                          </tr>`;         
+              }
+            }
+            this.tbody.innerHTML = str;
+        }
+        addEvent(){
+            var that = this;
+            this.tbody.addEventListener('click',function(eve){
+                var e = eve || window.event;
+                var target = e.target || e.srcElement;
+                if(target.className == "delete"){
+                    that.id = target.parentNode.getAttribute('index');
+                    target.parentNode.remove();
+                    that.setLocal(function(i){
+                        that.goods.splice(i,1);
+                    });
+                }
+            })
+            this.tbody.addEventListener('input',function(eve){
+                var e = eve ||window.event;
+                var target = e.target || e.srcElement;
+                if(target.className == "num"){
+                    that.id = target.parentNode.parentNode.getAttribute('index');
+                    that.val = target.value;
+                    that.setLocal(function(i){
+                        that.goods[i].num = that.val;
+                    });
+                }
+            })
+        }
+        setLocal(fn){
+            for(var i=0;i<this.goods.length;i++){
+                if(this.goods[i].id == this.id){
+                   fn(i);
+                }
+            }
+            localStorage.setItem("goods",JSON.stringify(this.goods));
+        }            
+    }
+    new Car();
+  </script>
+</html>

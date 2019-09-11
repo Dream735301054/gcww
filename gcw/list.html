@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>登陆</title>
+  <link rel="stylesheet" href="css/public.css"/>
+  <link rel="stylesheet" href="server/list.css"/>
+</head>
+<body>
+  <div id="header"></div>
+  <div id="search"></div>
+  <div id="nav"></div>  
+  <div id="main" class="margin">
+    <div class="t">
+      <span>当前位置：</span>
+      <a>首页</a>
+      <span>>红茶</span>
+    </div>
+    <div class="b">
+      <div class="l">
+        <div class="l-t"></div>
+        <div class="l-b">
+            <div class="l-tt"></div>
+            <ul class="list">
+                <!-- <li>
+                    <div>
+                       <img src="img/1255_thumb_G_1547859358821.jpg" alt=""> 
+                       <div class="boxx"></div>
+                    </div>                    
+                    <p>123</p>
+                    <span>123</span>                    
+                </li>                                          -->
+            </ul>
+        </div>
+      </div>
+      <div class="r"></div>
+    </div>
+    
+    
+  </div>
+  <div id="footer"></div>  
+</body>
+<script src="../jQuery.js"></script>
+
+<script>
+  $("#footer").load("http://localhost/1907/gcw/data.html footer")
+  $("#header").load("http://localhost/1907/gcw/data.html header")
+  $("#search").load("http://localhost/1907/gcw/data.html .search")
+  $("#nav").load("http://localhost/1907/gcw/data.html nav")
+</script>
+<script src="js/menu.js"></script>
+<script src="js/ajax2.0.js"></script>
+<script>
+    class List{
+        constructor(){
+            this.url = "http://localhost/1907/gcw/js/list.json";
+            this.list = document.getElementsByClassName("list")[0];
+            this.load();
+            this.addEvent();
+        }
+        load(){
+            var that = this;
+            ajax({               
+                url:this.url,
+                success:function(ser){
+                    that.ser = JSON.parse(ser)
+                    that.display();
+                }
+            })
+        }
+        display(){                       
+            var str = "";
+            for(var i=0;i<this.ser.length;i++){
+                str +=`<li class="goods" index="${this.ser[i].goodsId}">
+                            <img class="bth" src="${this.ser[i].url}" alt="">
+                            <a>${this.ser[i].name}</a>
+                            <span>${this.ser[i].price}</span>
+                            <div class="boxx">添加到购物车</div>
+                            </li>`
+                            // href="${this.ser[i].goodsId}.html"
+            }
+            this.list.innerHTML = str;
+        }
+        addEvent(){
+            var that = this;
+            this.list.addEventListener("click",function(eve){
+                var e = eve || winodw.event;
+                var target = e.target || e.srcElement;
+                if(target.className == 'bth'){
+                    that.id = target.parentNode.getAttribute("index");
+                    that.setLocal1();
+                }
+                if(target.className == 'boxx'){
+                    that.id = target.parentNode.getAttribute("index");
+                    that.setLocal2();
+                }
+            })
+        }
+        setLocal1(){
+           for(var i=0;i<this.ser.length;i++){
+               if(this.ser[i].goodsId==this.id){
+                  localStorage.setItem('goods',JSON.stringify(this.ser[i])); 
+                  window.location.href = "http://localhost/1907/gcw/details.html" 
+               }              
+           }
+           
+        }
+        setLocal2(){
+                this.goods = JSON.parse(localStorage.getItem('goods')) || [];
+                if(this.goods.length<1){
+                    this.goods.push({
+                        id:this.id,
+                        num:1
+                    })
+                }else{
+                    var i;
+                    var o = this.goods.some((val,index)=>{
+                        i = index;
+                        return val.id == this.id;
+                    })
+                    if(o){
+                        this.goods[i].num++;
+                    }else{
+                        this.goods.push({
+                        id:this.id,
+                        num:1
+                        })
+                    }
+                    // var onoff = true;
+                    // for(var i=0;i<this.goods.length;i++){
+                    //     if(this.goods[i].id==this.id){
+                    //         this.goods[i].num++
+                    //         onoff = false;
+                    //     }
+                    // }
+                    // if(onoff){
+                    //     this.goods.push({
+                    //     id:this.id,
+                    //     num:1
+                    // })
+                    // }
+                }
+                localStorage.setItem('goods',JSON.stringify(this.goods));
+            }
+        }
+    new List();
+</script>
+</html>
